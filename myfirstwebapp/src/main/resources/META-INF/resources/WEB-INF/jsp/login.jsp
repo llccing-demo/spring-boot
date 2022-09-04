@@ -3,7 +3,8 @@
     <title>login</title>
 </head>
 <body>
-<h1>Welcome to login page!</h1>
+<h1>Login</h1>
+<pre>${errorMessage}</pre>
 <form method="post">
     name: <input type="text" name="name"/>
     password: <input type="password" name="password"/>
