@@ -19,11 +19,26 @@ public class TodoService {
     }
 
     public List<Todo> findAllTodos(String name) {
-        return  todos.stream().filter(todo -> todo.username.equalsIgnoreCase(name)).collect(Collectors.toList());
+        return  todos.stream().filter(todo -> todo.getUsername().equalsIgnoreCase(name)).collect(Collectors.toList());
     }
 
     public void addTodo(String name, String description, LocalDate date, boolean isDone) {
-        Todo todo = new Todo((int)todos.stream().count(), name, description, date, isDone);
+        int id = (int)todos.stream().count() + 1;
+        Todo todo = new Todo(id, name, description, date, isDone);
+        todos.add(todo);
+    }
+
+    public void deleteById(int id) {
+        todos.stream().dropWhile(todo -> todo.getId() == id).collect(Collectors.toList());
+    }
+
+    public Todo findById(int id) {
+        Todo todo = todos.stream().filter(t -> t.getId() == id).findFirst().get();
+        return todo;
+    }
+
+    public void updateTodo(Todo todo) {
+        deleteById(todo.getId());
         todos.add(todo);
     }
 }

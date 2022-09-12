@@ -1,5 +1,7 @@
 package com.xinda.springboot.myfirstwebapp.todo;
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class Todo {
@@ -12,10 +14,11 @@ public class Todo {
         this.done = done;
     }
 
-    public int id;
-    public String username;
-    public String description;
-    public LocalDate targetDate;
+    private int id;
+    @Size(min = 10, message = "Enter at least 10 characters")
+    private String username;
+    private String description;
+    private LocalDate targetDate;
 
     public int getId() {
         return id;
@@ -49,7 +52,7 @@ public class Todo {
         this.targetDate = targetDate;
     }
 
-    public boolean done;
+    private boolean done;
 
     public boolean isDone() {
         return done;
